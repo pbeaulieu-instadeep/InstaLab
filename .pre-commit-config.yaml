@@ -1,0 +1,117 @@
+default_language_version:
+  python: python3
+
+# manifest.yaml: linked to AIchor runs
+# CHANGELOG.md: linked to releases
+exclude: "manifest.yaml|CHANGELOG.md"
+
+default_stages: [pre-commit]
+
+repos:
+  # Formatters
+  - repo: https://github.com/hakancelikdev/unimport
+    rev: 1.2.1
+    hooks:
+      - id: unimport
+        description: "Automatically removes unused imports from Python code."
+        args:
+          - --remove
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.37.0
+    hooks:
+      - id: yamllint
+        args:
+          - --config-file=.yamllint.yaml
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: debug-statements
+        description: "Detects Python `print` or `pdb` debug statements."
+      - id: check-ast
+        description: "Ensures Python files are parsable and valid."
+      - id: check-case-conflict
+        description: "Checks for filename conflicts in case-insensitive filesystems."
+      - id: check-builtin-literals
+        description: "Enforces literal syntax when initializing Python built-in types."
+      - id: check-docstring-first
+        description: "Checks that the docstring is the first statement in a file."
+      - id: check-merge-conflict
+        description: "Detects unresolved merge conflict markers in files."
+      - id: check-yaml
+        description: "Validates YAML files."
+        args: ["--unsafe"]
+      - id: end-of-file-fixer
+        description: "Ensures files end with a single newline character."
+      - id: mixed-line-ending
+        description: "Replaces or checks for mixed line endings."
+      - id: pretty-format-json
+        description: "Formats JSON files and sorts keys."
+        args: [--autofix]
+      - id: trailing-whitespace
+        description: "Trims trailing whitespace from files."
+
+  - repo: https://github.com/pappasam/toml-sort
+    rev: v0.24.2
+    hooks:
+      - id: toml-sort
+        description: "Sort and format toml files."
+        args:
+          - --all
+          - --in-place
+
+  # Ruff is used as both a linter and a formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.2
+    hooks:
+      - id: ruff
+        description: "Runs Ruff as a Python linter."
+        args: [--fix]
+      - id: ruff-format
+        description: "Formats Python code using Ruff."
+
+  # Linters
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.15.0
+    hooks:
+      - id: mypy
+        description: "Performs static type checking with Mypy."
+        additional_dependencies: [types-pyYAML, types-tabulate]
+        args:
+          - --no-strict-optional
+          - --ignore-missing-imports
+          - --python-version=3.10
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.44.0
+    hooks:
+      - id: markdownlint
+        description: "Lints Markdown files for consistent formatting."
+        args:
+          - --config=.markdownlint.yaml
+
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.0.0
+    hooks:
+      - id: conventional-pre-commit
+        description: "Enforces conventional commit message styles."
+        stages: [commit-msg]
+        args: ["ci", "build", "docs", "feat", "fix", "perf", "refactor", "style", "test", "EXP"]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        name: codespell
+        description: "Checks for common misspellings in text files."
+        entry: codespell --skip="*.js,*.json" --ignore-words=.codespell-ignore.txt
+        language: python
+        types: [text]
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.6.12 # must match UV_VERSION from Dockerfile and Dockerfile.lint
+    hooks:
+      - id: uv-lock
+        description: "Check dependencies locked in `uv.lock` are synced with `pyproject.toml`."
+        name: uv-lock

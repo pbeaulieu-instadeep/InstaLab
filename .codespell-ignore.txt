@@ -1,0 +1,4 @@
+# this file should only contain lowercase sequence of characters
+fpr
+aas
+ser
