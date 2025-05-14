@@ -1,0 +1,60 @@
+# Example markdownlint configuration with all properties set to their default value
+
+# Default state for all rules
+default: true
+
+# Path to configuration file to extend
+extends: null
+
+# MD001/heading-increment : Heading levels should only increment by one level at a time
+MD001: true
+
+# MD003/heading-style : Heading style
+MD003:
+  # Heading style
+  style: "consistent"
+
+# MD004/ul-style : Unordered list style
+MD004:
+  # List style
+  style: "consistent"
+
+no-hard-tabs: false
+whitespace: false
+
+# MD005/list-indent : Inconsistent indentation for list items at the same level
+MD005: true
+
+MD045: false
+
+# MD007/ul-indent : Unordered list indentation
+MD007:
+  # Spaces for indent
+  indent: 2
+
+# Maximum line length set to 100 characters
+MD013:
+  line_length: 100
+  tables: false   # Ignore line length for tables
+  code_blocks: false  # Ignore line length for code blocks
+
+# Enforce no trailing punctuation in headers
+MD026:
+  # Punctuation characters
+  punctuation: ".,;:!"
+
+# Allow inline HTML (disable this rule)
+MD033: false
+
+# Require consistent use of emphasis (e.g., `**bold**` instead of `__bold__`)
+MD049: true
+
+MD046: false # disabling consistency of code block style (indented/fenced)
+
+MD024: false # allowing multiple headings with the same content/title
+MD031: false # disabling that fenced code blocks should be surrounded by blank lines
+
+MD055: true # disable table pipe style
+MD034: false # allowing bare URLs use
+MD041: false # disabling rule that first line in a file should be a top-level heading
+MD040: false # disabling that fenced code blocks should have a language specified

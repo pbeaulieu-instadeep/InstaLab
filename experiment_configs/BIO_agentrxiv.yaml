@@ -1,0 +1,37 @@
+# Here is the research prompt. If num-papers-to-write > 1, you can treat this as a "research direction"
+# otherwise it can be *very* specific and can be treated as a full research idea
+research-topic:
+  - "Your goal is to design reasoning and prompt engineering techniques to maximize FRANK scores median"
+  - "on CD8 epitopes dataset to beat the netmhcpan4.1 benchmark by fine tuning gemini. Your idea should be very novel."
+
+# Here you can put your Gemini API key or set env var GEMINI_API_KEY
+api-key: "XXX"
+
+# Base language
+language: "English"
+
+# Number of arxiv papers to lit review
+num-papers-lit-review: 5
+
+# Total number of papers to write in sequence
+num-papers-to-write: 1
+
+# Total paper-solver steps per lab
+papersolver-max-steps: 1
+
+# Compile latex into PDFs during paper-solver
+compile-latex: false
+
+# Task notes
+task-notes:
+  plan-formulation:
+    - 'You should come up with a plan for only ONE experiment aimed at maximizing performance on the test set of MS Ligands from netmhcpan4.1'
+    - 'using prompting and biology techniques.'
+    - 'The baseline performance of NetMHCpan-4.1 on FRANK scores median is 	0.0021'
+    - 'Please use gemini-2.5-pro-preview-03-25 for your experiments'
+    - 'You must evaluate on the entire CD8 epitopes dataset'
+    - 'Your plan should be a novel prompting/enginerering technique'
+    - 'Your evaluation shound aim to get state-of-the-art performance on the CD8 epitopes dataset using a novel prompting idea'
+    - "DO NOT PLAN FOR TOO LONG. Submit your plan soon."
+  report-writing:
+    - 'The baseline performance of NetMHCpan-4.1 on FRANK scores median is 	0.0021'

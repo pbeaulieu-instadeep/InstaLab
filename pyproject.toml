@@ -1,0 +1,65 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools", "setuptools_scm"]
+
+[project]
+dependencies = [
+  "arxiv>=2.2.0",
+  "google-api-python-client>=2.169.0",
+  "google-generativeai>=0.8.5",
+  "pre-commit>=4.2.0",
+  "pypdf>=5.5.0",
+  "pyyaml>=6.0.2"
+]
+description = "Add your description here"
+name = "instalab"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.1.0"
+
+[project.scripts]
+ai_lab_repo = "instalab.ai_lab_repo:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+ignore = [
+  "E501" # line-too-long
+]
+select = [
+  "A", # flake8-builtins
+  "ARG", # flake8-unused-arguments
+  "B", # flake8-bugbear
+  "C", # flake8-comprehensions
+  "C90", # mccabe == cognitive-complexity
+  "D", # pydocstyle
+  "E", # pycodestyle
+  "F", # Pyflakes
+  "F632", # pyflakes: is-literal
+  "I", # isort
+  "N", # pep8-naming
+  "PT", # flake8-pytest-style
+  "UP", # pyupgrade
+  "W605" # pycodestyle: invalid-escape-sequence
+]
+
+[tool.ruff.lint.flake8-errmsg]
+max-string-length = 20
+
+[tool.ruff.lint.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.ruff.lint.isort]
+force-single-line = true
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.setuptools.packages.find]
+include = ["instalab*"]
